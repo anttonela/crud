@@ -1,0 +1,39 @@
+<?php
+
+namespace Crud\Utilizadores;
+
+use Connection\Connection;
+
+class Banco extends Connection
+{
+    public function executar(string $query): void
+    {
+        $conexao = $this->connectionDataBase();
+        $statement = $conexao->prepare($query);
+        $statement->execute();
+    }
+    
+    public function execSelect(string $query): array
+    {
+        $conexao = $this->connectionDataBase();
+        $statement = $conexao->prepare($query);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+
+    public function getNomeDosCampos($arValores = []): array
+    {
+        return array_keys($arValores);
+    }
+
+    public function getValores($arValores = []): array
+    {
+        $arResposta = [];
+
+        foreach ($arValores as $chave => $valor) {
+            $arResposta[] = $valor;
+        }
+
+        return $arResposta;
+    }
+}
