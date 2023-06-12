@@ -64,20 +64,28 @@ class Select extends Banco
         return $sql;
     }
 
-    public function selectAll(): void
+    /*
+    public function selectAll()
     {
         if (empty($this->column) && empty($this->where) && empty($this->on) && empty($this->limit) && empty($this->notNull) && empty($this->isNull)) {
-            print $this->selectTable();
+            $this->sql = $this->selectTable();
+            return $this->sql;
         }
-        $sql = null;
+        $this->sql = null;
+        return $this->sql;
     }
+    */
 
     public function condicoes(array $arDados = []): string
     {
         $sql = $this->sql;
 
         $this->setSelect($arDados);
-        $this->selectAll();
+        
+        if (empty($this->column) && empty($this->where) && empty($this->on) && empty($this->limit) && empty($this->notNull) && empty($this->isNull)) {
+            $this->sql = $this->selectTable();
+            return $this->sql.";";
+        }
 
         empty($this->column) && !empty($this->where) ? $sql = $sql . $this->selectTable() : null;
 

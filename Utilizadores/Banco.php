@@ -13,7 +13,7 @@ class Banco extends Connection
         $statement->execute();
     }
     
-    public function execSelect(string $query): array
+    public function executarFetchAll(string $query): array
     {
         $conexao = $this->connectionDataBase();
         $statement = $conexao->prepare($query);

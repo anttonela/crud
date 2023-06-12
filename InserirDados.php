@@ -2,9 +2,8 @@
 
 namespace Crud;
 
-require_once __DIR__ . "/../vendor/autoload.php";
-
 use Crud\Functions\Select;
+use Crud\Functions\Update;
 use Crud\Utilizadores\Banco;
 use Crud\Utilizadores\Tabela;
 use PDOException;
@@ -60,15 +59,26 @@ class InserirDados extends Banco
         ];
 
         try {
-            $executar = $this->execSelect($table->condicoes($arDados));
+            $executar = $this->executarFetchAll($table->condicoes($arDados));
             print "\n\033[1;32mSelect será realizado com sucesso.\033[0m\n\n";
             print_r($executar);
         } catch (PDOException $erro) {
             print "\n\033[1;31mErro ocorrido ao tentar encontrar dado na tabela:\033[0m\n\n\033[1;37m{$erro}\033[0m\n";
         }
     }
-}
 
-$salvar = new InserirDados();
-$salvar->select();
-return $salvar;
+    public function update(): void
+    {
+        $table = new Update("usuario");
+
+        $arDados = [
+            "SET" => "nome = 'Antonela'",
+            "WHERE" => "id_user = 6",
+            "'AND'" => "",
+            "RETURNING" => "",
+        ];
+
+        $executar = $this->executarFetchAll($table->condicoes($arDados));
+        print_r($executar);
+    }
+}
