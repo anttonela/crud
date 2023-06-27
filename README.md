@@ -8,10 +8,8 @@ Crud simples no PHP com conexão ao PostgreSQL. Tendo como adicionar, deletar, s
 ```
 linha 10 | $salvar->select(); // inserir, deletar, select ou update
 ```
-- ir no terminal e rodar dois comandos para imprimir o resultado:
+- ir no terminal e imprimir o resultado:
 ```
-1 | cd library/crud
-
-2 | php salvarDados.php
+php salvarDados.php
 ```
 ##
